@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport Service System - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    .loader {
+  border: 2px solid #f3f3f3; /* Light grey */
+  border-top: 2px solid #000000; /* Blue */
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+<body class="flex flex-col">
+    <nav class="shadow-lg border-b-4 border-[#2E5273]">
+      
+        <ul class="flex gap-4 p-4">
+            <li><a class="text-[#2E5273] font-bold ">PassMe</a></li>
+            <li><a href="/" class="hover:bg-gray-200 h-full p-4 cursor-pointer">Home</a></li>
+             <li><a href="/" class="h-full p-4 cursor-pointer" th:text="${username}"></a></li>
+            <li><a href="/logout" class="ml-auto hover:bg-gray-200 h-full p-4 cursor-pointer">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="flex flex-col items-center justify-center min-h-[83vh]">
+      <p class="text-green-400" th:text="${response}"></p>
+                    <p class="text-red-400" th:text="${error}"></p>
+        <div class="gap-[100px] flex flex-col">
+            <span>Welcome to PassMe! To start, choose a service whether to renew your existing passport or to apply for one.</span>
+
+<div class="flex flex-row gap-[190px] items-center justify-center">
+            <div class="flex flex-col items-center gap-4">
+        <span>Apply for a passport</span>
+        <a href="/apply">
+
+        
+        <button class="p-6 px-14 text-white bg-[#2E5273] text-[1.5rem] hover:opacity-80">Apply here</button>
+    </a>
+                    </div>
+                     <div class="flex flex-col items-center gap-4">
+        <span>Renew your passport</span>
+        <a href="/renew">
+        <button  class="p-6 px-14 text-white bg-[#2E5273] text-[1.5rem] hover:opacity-80">Renew here</button></a>
+                    </div>
+                    </div>
+        </div>
+    </div>
+
+    <footer class="mr-auto ml-auto">
+        All rights reserved.
+    </footer>
+</body>
+</html>

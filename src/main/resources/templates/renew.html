@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport Service System - Renew</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    .loader {
+  border: 2px solid #f3f3f3; /* Light grey */
+  border-top: 2px solid #000000; /* Blue */
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+<body class="flex flex-col">
+      <nav class="shadow-lg border-b-4 border-[#2E5273]">
+      
+        <ul class="flex gap-4 p-4">
+            <li><a class="text-[#2E5273] font-bold ">PassMe</a></li>
+            <li><a href="/" class="hover:bg-gray-200 h-full p-4 cursor-pointer">Home</a></li>
+              <li><a href="/" class="h-full p-4 cursor-pointer" th:text="${username}"></a></li>
+            <li><a href="/logout" class="ml-auto hover:bg-gray-200 h-full p-4 cursor-pointer">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="flex flex-col min-h-[90vh] p-12 items-center justify-center">
+        <form method="post" th:object="${data}" th:action="@{/createPassport}">
+            <p class="text-green-400" th:text="${response}"></p>
+                    <p class="text-red-400" th:text="${error}"></p>
+        <span class="text-[1.2rem] font-bold">Personal Information</span>
+         
+        <div class="p-8 flex flex-row gap-4 border border-gray-200 rounded-md shadow-lg">
+
+            <!--1st col start-->
+
+           
+            <div class="flex flex-col gap-2">
+<span class="text-[1.2rem] ml-auto flex opacity-0">t</span>
+         <div class="flex flex-col">
+                    <label>
+                        Last Name
+                    </label>
+                        <input required autocomplete="on" name="lastName" id="lastName" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+            <div class="flex flex-col">
+                    <label>
+                        First Name
+                    </label>
+                        <input required autocomplete="on" name="firstName" id="firstName" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+
+
+                    <div class="flex flex-col">
+                    <label>
+                        Middle Name
+                    </label>
+                        <input autocomplete="on" name="middleName" id="middleName" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+
+                    <div class="flex flex-col">
+                    <label>
+                        Place of Birth
+                    </label>
+                        <input required autocomplete="on" name="placebirth" id="placebirth" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+
+                    <div class="flex flex-col">
+                    <label>
+                        Date of Birth
+                    </label>
+                        <input required autocomplete="on" name="datebirth" id="datebirth" type="date" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+
+                    <div class="flex flex-col">
+                    <label>
+                       Email Address
+                    </label>
+                        <input required autocomplete="on" name="email" id="email" type="email" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+                    </div>
+    <!--1st col end-->
+
+
+<!--2nd col-->
+<div class="flex flex-col gap-2">
+    <span class="text-[1.2rem] ml-auto flex opacity-0">t</span>
+         <div class="flex flex-col">
+                    <label>
+                        Phone Number
+                    </label>
+                        <input
+                         pattern="[0-9]+"
+                    maxLength="12" 
+                        required autocomplete="on" name="phone" id="phone" type="text" class="outline-0 bg-gray-200 p-2 min-w-[200px] max-w-[280px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+            <div class="flex flex-col">
+                    <label>
+                        Permanent Address Line 1
+                    </label>
+                        <input required autocomplete="on" name="addressone" id="addressone" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+
+
+                    <div class="flex flex-col">
+                    <label>
+                         Permanent Address Line 2
+                    </label>
+                        <input autocomplete="on" name="addresstwo" id="addresstwo" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+
+                    <!--Mini Row-->
+                    <div class="flex flex-row gap-2">
+                    <div class="flex flex-col">
+                    <label>
+                        Occupation
+                    </label>
+                        <input required autocomplete="on" name="occupation" id="occupation" type="text" class="outline-0 bg-gray-200 p-2 min-w-[280px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+                    <div class="flex flex-col">
+                    <label>
+                        Relationship Status
+                    </label>
+                        <input required autocomplete="on" name="relationship" id="relationship" type="text" class="outline-0 bg-gray-200 p-2 min-w-[280px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+                    </div>
+                     <!--Mini Row-->
+
+                     <!--Mini Row-->
+                    <div class="flex flex-row gap-2">
+                    <div class="flex flex-col">
+                    <label>
+                        Emergency Contact Person
+                    </label>
+                        <input required autocomplete="on" name="emergency" id="emergency" type="text" class="outline-0 bg-gray-200 p-2 min-w-[280px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+                    <div class="flex flex-col">
+                    </div>
+                    </div>
+                     <!--Mini Row-->
+
+                    <!--Mini Row-->
+                    <div class="flex flex-row gap-2">
+                    <div class="flex flex-col">
+                    <label>
+                        Phone Number
+                    </label>
+                        <input    
+                        pattern="[0-9]+"
+                    maxLength="10"
+                    required autocomplete="on" name="ephone" id="ephone" type="text" class="outline-0 bg-gray-200 p-2 min-w-[280px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+                    <div class="flex flex-col relative bottom-8">
+                    <label>
+                        Relationship
+                    </label>
+                        <input required autocomplete="on" name="erelationship" id="erelationship" type="text" class="outline-0 bg-gray-200 p-2 min-w-[280px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+                    </div>
+                     <!--Mini Row-->
+
+
+                     <!--Mini Row-->
+                    <div class="flex flex-row gap-2">
+                    <div class="flex flex-col">
+                    <label>
+                        Passport Number
+                    </label>
+                        <input required autocomplete="on" name="passport" id="passport" type="text" class="outline-0 bg-gray-200 p-2 min-w-[280px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+                    <div class="flex flex-col">
+                    <label>
+                        DFA Branch
+                    </label>
+                        <select required autocomplete="on" name="branch" id="branch" type="text" class="outline-0 bg-gray-200 p-2 min-w-[280px] rounded-md focus:ring-2 focus:ring-blue-40">
+                      
+                               <option value="DFA CO NCR-Central">
+                                    DFA CO NCR-Central
+                            </option>
+      <option value="DFA CO NCR-North">
+                                    DFA CO NCR-North
+                            </option>
+                               <option value="DFA CO NCR-East">
+                                    DFA CO NCR-East
+                            </option>
+
+                               <option value="DFA CO NCR-South">
+                                    DFA CO NCR-South
+                            </option>
+                                 <option value="DFA CO NCR-West">
+                                    DFA CO NCR-West
+                            </option>
+                             </option>
+                                 <option value="DFA CO NCR-Northeast">
+                                    DFA CO NCR-Northeast
+                            </option>
+                        </select>
+                    </div>
+                    </div>
+                     <!--Mini Row-->
+                    </div>
+<!--2nd col end-->
+
+
+<!--3rd col start-->
+<div class="flex flex-col gap-2">
+    <span class="text-[1.2rem] ml-auto flex">Parent's Information</span>
+     <span class="text-[1.2rem] mr-auto ml-auto flex mt-4">Father</span>
+         <div class="flex flex-col">
+                    <label>
+                        First Name
+                    </label>
+                        <input required autocomplete="on" name="flastName" id="lastName" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+            <div class="flex flex-col">
+                    <label>
+                        Last Name
+                    </label>
+                        <input required autocomplete="on" name="ffirstName" id="firstName" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+                     <span class="text-[1.2rem] mr-auto ml-auto flex">Mother</span>
+                     <div class="flex flex-col">
+                    <label>
+                        First Name
+                    </label>
+                        <input required autocomplete="on" name="mlastName" id="lastName" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+            <div class="flex flex-col">
+                    <label>
+                        Last Name
+                    </label>
+                        <input required autocomplete="on" name="mfirstName" id="firstName" type="text" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+
+                 
+                    </div>
+<!--3rd col end-->
+
+                    </div>
+                       <button type="submit" class="flex mt-4 ml-auto bg-[#2E5273] text-white px-14 py-2 hover:opacity-80 rounded-md text-[1.5rem]">Next -></button>
+        </div>
+     
+</form>
+
+    </div>
+
+    <footer class="mr-auto ml-auto">
+        All rights reserved.
+    </footer>
+</body>
+</html>

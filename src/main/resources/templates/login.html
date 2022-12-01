@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport Service System - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    .loader {
+  border: 2px solid #f3f3f3; /* Light grey */
+  border-top: 2px solid #000000; /* Blue */
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+<body class="flex flex-col">
+    <nav class="shadow-lg border-b-4 border-[#2E5273]">
+      
+        <ul class="flex gap-4 p-4">
+            <li><a class="text-[#2E5273] font-bold ">PassMe</a></li>
+           
+            <li ><a href="/login" class="hover:bg-gray-200 h-full p-4 cursor-pointer">Login</a></li>
+            <li ><a href="/register" class="hover:bg-gray-200 h-full p-4 cursor-pointer">Register</a></li>
+        </ul>
+    </nav>
+
+    <div class="flex flex-col items-center justify-center min-h-[90vh]">
+        <div class="flex flex-row h-full items-center justify-center gap-[200px]">
+            <div>
+                <span class="flex text-[4rem] font-medium text-center">Passport Service <br> System</span>
+            </div>
+            <div>
+                <form class="flex flex-col gap-6" method="post" th:object="${data}" th:action="@{/loginUser}">
+                    <p class="text-green-400" th:text="${response}"></p>
+                    <p class="text-red-400" th:text="${error}"></p>
+                    <span class="mr-auto ml-auto font-medium text-[1.4rem]">Login</span>
+                    <div class="flex flex-col ">
+                    <label>
+                        Username
+                    </label>
+                        <input type="text" autocomplete="on" name="username" id="username"  class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-400"/>
+                    </div>
+                     <div class="flex flex-col">
+                    <label>
+                        Password
+                    </label>
+                        <input type="password" autocomplete="on" name="password" id="password" class="outline-0 bg-gray-200 p-2 min-w-[300px] rounded-md focus:ring-2 focus:ring-blue-40"/>
+                    </div>
+                    <div class="flex flex-row gap-2">
+                        <span>Not yet registered?</span>
+                        <a href="/register" class="text-blue-400 underline cursor-pointer">Sign-up now!</a>
+                    </div>
+                    <div class="cursor-pointer gap-4 flex items-center p-2 font-medium bg-[#2E5273] rounded-md text-white mr-auto ml-auto hover:opacity-80 px-8 focus:ring-2 focus:ring-blue-400">
+                    <button class="">Submit</button>
+                    <!--<div class="loader"></div>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+
+    <footer class="mr-auto ml-auto">
+        All rights reserved.
+    </footer>
+</body>
+</html>
